@@ -228,7 +228,7 @@ def main_program_loop():
         print("signing")
         wait_css_selector("button[class='Blockreact__Block-sc-1xf18x6-0 Buttonreact__StyledButton-sc-glfma3-0 kXZare fzwDgL']")
         sign = driver.find_element_by_css_selector("button[class='Blockreact__Block-sc-1xf18x6-0 Buttonreact__StyledButton-sc-glfma3-0 kXZare fzwDgL']")
-        sign.click()
+        driver.execute_script("arguments[0].click();", sign)
         time.sleep(2)
 
         main_page = driver.current_window_handle
