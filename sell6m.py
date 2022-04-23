@@ -238,10 +238,45 @@ def main_program_loop():
 
         # change the control to signin page
         driver.switch_to.window(login_page)
-        wait_css_selector("button[data-testid='request-signature__sign']")
-        sign = driver.find_element_by_css_selector("button[data-testid='request-signature__sign']")
-        sign.click()
-        time.sleep(1)
+
+        if is_polygon.get():
+            try:
+                driver.find_element(By.XPATH, "//*[@id='app-content']/div/div[2]/div/div[3]/div[1]").click()
+                time.sleep(0.7)
+            except: 
+                wait_xpath("//div[@class='signature-request-message__scroll-button']")
+                polygonscrollsign = driver.find_element(By.XPATH, "//div[@class='signature-request-message__scroll-button']")
+                driver.execute_script("arguments[0].click();", polygonscrollsign)
+                time.sleep(0.7)
+
+            try:
+                wait_xpath('//*[@id="app-content"]/div/div[2]/div/div[4]/button[2]')
+                driver.find_element(By.XPATH, '//*[@id="app-content"]/div/div[2]/div/div[4]/button[2]').click()
+                time.sleep(0.7)
+            except:
+                wait_xpath('//button[text()="Sign"]')
+                metasign = driver.find_element(By.XPATH, '//button[text()="Sign"]')
+                driver.execute_script("arguments[0].click();", metasign)
+                time.sleep(0.7)
+        else:
+            try:
+                driver.find_element(By.XPATH, "//*[@id='app-content']/div/div[2]/div/div[3]/div[1]").click()
+                time.sleep(0.7)
+            except: 
+                wait_xpath("//div[@class='signature-request-message__scroll-button']")
+                scrollsign = driver.find_element(By.XPATH, "//div[@class='signature-request-message__scroll-button']")
+                driver.execute_script("arguments[0].click();", scrollsign)
+                time.sleep(0.7)
+
+            try:
+                wait_xpath('//*[@id="app-content"]/div/div[2]/div/div[4]/button[2]')
+                driver.find_element(By.XPATH, '//*[@id="app-content"]/div/div[2]/div/div[4]/button[2]').click()
+                time.sleep(0.7)
+            except:
+                wait_xpath('//button[text()="Sign"]')
+                metasign = driver.find_element(By.XPATH, '//button[text()="Sign"]')
+                driver.execute_script("arguments[0].click();", metasign)
+                time.sleep(0.7)
        
         # change control to main page
         driver.switch_to.window(main_page)
